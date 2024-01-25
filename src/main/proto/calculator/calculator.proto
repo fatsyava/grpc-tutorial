@@ -1,0 +1,18 @@
+package calculator;
+option java_package = "com.vmelnyk.grpc.tutorial.calculator";
+option java_multiple_files = true;
+import "calculator/sum.proto";
+import "calculator/prime.proto";
+import "calculator/avg.proto";
+import "calculator/max.proto";
+import "calculator/sqrt.proto";
+service CalculatorService {
+  rpc sum(SumRequest) returns(SumResponse); //Unary API
+  rpc prime(PrimeRequest) returns(
+      stream PrimeResponse); // Server Streaming
+  rpc avg(stream AvgRequest) returns(AvgResponse); //Client Streaming
+  rpc max(stream MaxRequest) returns(
+      stream MaxResponse); //Bi-directional streaming
+  // Return a Status.INVALID if the SqrtRequest is negative
+  rpc sqrt(SqrtRequest) returns(SqrtResponse);
+}
